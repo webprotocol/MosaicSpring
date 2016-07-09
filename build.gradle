@@ -1,0 +1,80 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply plugin: 'spring-boot'
+
+mainClassName = 'com.hybrid.MainApplication'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+buildscript {
+	ext {
+		springBootVersion = '1.3.6.RELEASE'
+	}
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+	}
+}
+
+jar {
+	baseName = 'MosaicSpring'
+	version = '0.0.1-SNAPSHOT'
+}
+
+/*
+eclipse {
+	classpath {
+		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		// containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+	}
+}
+*/
+
+
+
+/*
+ * Utility
+ */
+repositories { mavenCentral() }
+
+dependencies {
+	compile "joda-time:joda-time:2.2"
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'
+}
+
+/*
+ * Gluon Particle
+ */
+repositories {
+    jcenter()
+    maven {
+        url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+    }
+}
+
+dependencies {
+    compile 'com.gluonhq:particle:1.1.0'
+}
+
+/*
+ * Spring Boot + MyBatis
+ */
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
+	
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+
+
+
+
+
+
+
