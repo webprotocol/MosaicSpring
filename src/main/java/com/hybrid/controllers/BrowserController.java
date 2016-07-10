@@ -48,12 +48,13 @@ public class BrowserController {
     		
     		PathMatchingResourcePatternResolver search = new PathMatchingResourcePatternResolver();
     		try {
-				Resource[] rs =  search.getResources("classpath:/bundles/*");
+				Resource[] rs =  search.getResources("classpath:com/hybrid/*");
 				for (Resource r : rs) {
 					System.out.println(r.getFilename());
 				}
+				System.out.println("#################");
 				
-				rs =  search.getResources("file:/c:/*");
+				rs =  search.getResources("file:*");
 				
 				for (Resource r : rs)
 					System.out.println(r.getFilename());
