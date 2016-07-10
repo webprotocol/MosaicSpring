@@ -34,10 +34,11 @@ public class MenuActions {
 //		});
 //	}
     
-    @ActionProxy(text="Exit", accelerator="alt+F4")
-    private void exit() {
-        app.exit();
-    }
+//    @ActionProxy(text="Exit", accelerator="alt+F4")
+//    private void exit() {
+//    	System.out.println("exit()...");
+//        app.exit();
+//    }
     
     @ActionProxy(text="Injection Test")
     private void inject() {

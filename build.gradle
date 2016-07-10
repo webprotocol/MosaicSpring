@@ -1,39 +1,43 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'application'
-apply plugin: 'spring-boot'
-
-mainClassName = 'com.hybrid.MainApplication'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 buildscript {
 	ext {
 		springBootVersion = '1.3.6.RELEASE'
 	}
 	repositories {
-		jcenter()
+		mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
 	}
 }
 
-jar {
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+mainClassName = 'com.hybrid.MainApplication'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+war {
 	baseName = 'MosaicSpring'
 	version = '0.0.1-SNAPSHOT'
+}
+
+configurations {
+	providedRuntime
 }
 
 /*
 eclipse {
 	classpath {
 		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-		// containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
 	}
 }
 */
-
 
 
 /*
@@ -66,11 +70,17 @@ dependencies {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
-	compile files('libs/ojdbc7.jar')
-//	compile fileTree(dir: 'libs', include: '*.jar')
+	compile('org.springframework.boot:spring-boot-starter-web')
+
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.3'
 	
 	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
 	
+	compile files('libs/ojdbc7.jar')
+//	compile fileTree(dir: 'libs', include: '*.jar')
+
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

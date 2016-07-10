@@ -6,17 +6,23 @@ import com.gluonhq.particle.view.ViewManager;
 
 import java.util.ResourceBundle;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.stage.WindowEvent;
+import javafx.application.Platform;
+
 import javax.inject.Inject;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.control.action.ActionMap;
 import org.controlsfx.control.action.ActionProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class PrimaryController {
 
@@ -36,6 +42,7 @@ public class PrimaryController {
     ApplicationContext ctx;
     
     private Action actionSignin;
+    
 
     public PrimaryController() {
     }
@@ -49,7 +56,31 @@ public class PrimaryController {
         
         });
         
+        Platform.runLater(new Runnable() {
+			public void run() {
+				
+			}
+		});
+        
+        javafx.application.Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				app.getPrimaryStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
+					
+					@Override
+					public void handle(WindowEvent event) {
+						exit();
+						System.out.println("### close()...");
+						
+					}
+				});
+			}
+		});
+        
+
         System.out.println("PrimaryController.initialize()... " +  ctx.getBean(FXMLLoader.class).getControllerFactory());
+        
         
     }
     
@@ -65,7 +96,8 @@ public class PrimaryController {
     }
     
     public void postInit() {
-        if (first) {
+
+    	if (first) {
             stateManager.setPersistenceMode(StateManager.PersistenceMode.USER);
             addUser(stateManager.getProperty("UserName").orElse("").toString());
             first = false;
@@ -90,5 +122,15 @@ public class PrimaryController {
         input.setContentText("Input your name:");
         input.showAndWait().ifPresent(this::addUser);
     }
+ 
+  @ActionProxy(text="Exit", accelerator="alt+F4")
+  private void exit() {
+  	System.out.println("PrimaryControllor.exit()...");
+  	AnnotationConfigEmbeddedWebApplicationContext actx = (AnnotationConfigEmbeddedWebApplicationContext) ctx;
+  	actx.close();
+  	System.out.println("ctx.close()...");
+      app.exit();
+  }
+
 
 }

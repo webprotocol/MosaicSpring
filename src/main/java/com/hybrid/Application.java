@@ -3,6 +3,7 @@ package com.hybrid;
 import org.controlsfx.control.StatusBar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
@@ -18,6 +19,7 @@ import javafx.scene.control.ToolBar;
 import javafx.util.Callback;
 
 @SpringBootApplication
+@ServletComponentScan 
 public class Application {
 	
 	public Application() {

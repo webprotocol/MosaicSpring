@@ -43,7 +43,8 @@ public class BrowserController {
     	btnSelect.setOnAction(e -> {
     		System.out.println("btnSelect...");
     		
-    		engine.load(getClass().getResource("/webapp/index.html").toString());
+//    		engine.load(getClass().getResource("/webapp/index.html").toString());
+    		engine.load("http://localhost:8080");
     		
     		PathMatchingResourcePatternResolver search = new PathMatchingResourcePatternResolver();
     		try {
