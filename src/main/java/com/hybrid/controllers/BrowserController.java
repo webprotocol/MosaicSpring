@@ -4,6 +4,7 @@ import com.gluonhq.particle.application.Particle;
 import com.gluonhq.particle.application.ParticleApplication;
 import com.gluonhq.particle.view.ViewManager;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -20,6 +21,8 @@ import javax.inject.Inject;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.control.action.ActionMap;
 import org.controlsfx.control.action.ActionProxy;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 public class BrowserController {
 
@@ -41,6 +44,22 @@ public class BrowserController {
     		System.out.println("btnSelect...");
     		
     		engine.load(getClass().getResource("/webapp/index.html").toString());
+    		
+    		PathMatchingResourcePatternResolver search = new PathMatchingResourcePatternResolver();
+    		try {
+				Resource[] rs =  search.getResources("classpath:/bundles/*");
+				for (Resource r : rs) {
+					System.out.println(r.getFilename());
+				}
+				
+				rs =  search.getResources("file:/c:/*");
+				
+				for (Resource r : rs)
+					System.out.println(r.getFilename());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
     		
     	});
         

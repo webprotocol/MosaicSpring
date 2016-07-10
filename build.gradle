@@ -67,9 +67,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile files('libs/ojdbc7.jar')
+//	compile fileTree(dir: 'libs', include: '*.jar')
 	
-//	compile group: 'com.oracle', name: 'ojdbc14', version: '10.2.0.3.0'
-//	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
+	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
