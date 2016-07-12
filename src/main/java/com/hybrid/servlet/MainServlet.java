@@ -40,13 +40,13 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ###@@@ ").append(request.getContextPath());
 		System.out.println("########################################");
-		System.out.println("MainServlet.init(ServletConfig config)..");
+		System.out.println("MainServlet.init(ServletConfig config)..xxx");
 		System.out.println("########################################");
 		System.out.println("########################################");
 		System.out.println("########################################");
-		MainApplication.main(new String[] {""});
+//		MainApplication.main(new String[] {""});
 	}
 
 	/**
