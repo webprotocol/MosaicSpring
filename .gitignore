@@ -1,10 +1,10 @@
 .classpath
 .project
 .settings
-.gradle/
-bin/
-build/
-config/
+.gradle
+bin
+build
+config
 *.log
 
 
