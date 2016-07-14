@@ -34,6 +34,7 @@ public class PrimaryView extends FXMLView {
     	
         controller = (PrimaryController) getController();
         controller.init();
+        
 //        super.init();
     }
     

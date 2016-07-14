@@ -8,7 +8,7 @@ public class ExampleController {
  
     @RequestMapping("/example")
     public String index() {
-        return "Hello World & Spring Loaded!##########@@@@";
+        return "Hello World & Spring Loaded!@@@@";
     }
 }
 

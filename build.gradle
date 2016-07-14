@@ -14,21 +14,37 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'application'
-apply plugin: 'eclipse-wtp'
-apply plugin: 'spring-boot'
 apply plugin: 'war'
+apply plugin: 'spring-boot'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
 
+/*
+ * 1. MainClass
+ */
 mainClassName = 'com.hybrid.MainApplication'
+
+/*
+ * 2. Encoding & Compile Version
+ */
+[compileJava,compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-eclipse {
-    classpath {
-        defaultOutputDir = file("${buildDir}/classes/main")
-    }
-}
+/*
+ * 3. Output Directory
+ */
+eclipse.classpath.defaultOutputDir = file("${buildDir}/classes/main")
 
+/*
+ * 4. Test Logging
+ */
+test.testLogging.showStandardStreams = false
+
+/*
+ * 5. War 설정
+ */
 war {
 	baseName = 'MosaicSpring'
 	version = '0.0.1-SNAPSHOT'
@@ -38,30 +54,8 @@ configurations {
 	providedRuntime
 }
 
-/*
-eclipse {
-	classpath {
-		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-	}
-}
-*/
-
-
-/*
- * Utility
- */
-repositories { mavenCentral() }
-
-dependencies {
-	compile "joda-time:joda-time:2.2"
-	compile group: 'commons-io', name: 'commons-io', version: '2.5'
-}
-
-/*
- * Gluon Particle
- */
-repositories {
+repositories { 
+	mavenCentral() 
     jcenter()
     maven {
         url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
@@ -69,26 +63,26 @@ repositories {
 }
 
 dependencies {
-    compile 'com.gluonhq:particle:1.1.0'
+	compile "joda-time:joda-time:2.2"
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 }
 
-/*
- * Spring Boot + MyBatis
- */
 dependencies {
+    compile 'com.gluonhq:particle:1.1.0'
+    
+	compile group: 'org.springframework', name: 'springloaded', version: '1.2.6.RELEASE'
+
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-web')
 
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.3'
+	providedRuntime group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.3'
 	
 	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
 	
 	compile files('libs/ojdbc7.jar')
-//	compile fileTree(dir: 'libs', include: '*.jar')
-
-	compile group: 'org.springframework', name: 'springloaded', version: '1.2.6.RELEASE'
+	compile fileTree(dir: 'libs', include: '*.jar')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
