@@ -11,7 +11,6 @@ buildscript {
 		classpath('org.springframework:springloaded:1.2.6.RELEASE') 
 	}
 }
-
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'war'
@@ -44,9 +43,14 @@ eclipse {
             //contextPath = project.name // 원하는 contextPath 지정. 단, 빈 컨텍스트패스는 '/' 로 지정
         }
         facet {
+	        def oldJstWebFacet = facets.findAll {
+	                it.name == 'jst.web'
+	            }
+            facets.removeAll(oldJstWebFacet)
+        
             facet name: 'jst.web', version: '3.1' 	// Servlet Spec Version 지정
             facet name: 'jst.java', version: '1.8' 
-           // facet name: 'wst.jsdt.web', version: '1.0' 
+            //facet name: 'wst.jsdt.web', version: '1.0' 
         }
     }
 }
