@@ -11,6 +11,7 @@
 <title>hello.jsp</title>
 </head>
 <body>
+<h1>src/main/resources/META-INF/resources/hello.jsp</h1>
 <h1>Hello JSP !!!!@@@###</h1>
 
 <%
