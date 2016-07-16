@@ -6,5 +6,6 @@ bin
 build
 config
 *.log
+src/main/resources/META-INF/
 
 
